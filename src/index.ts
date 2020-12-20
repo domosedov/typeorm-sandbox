@@ -3,6 +3,8 @@ import { createConnection, getRepository } from "typeorm";
 import { City } from "./entity/City";
 import { Profile } from "./entity/Profile";
 import { Role, User } from "./entity/User";
+import entities from './entity'
+import { Subject } from "./entity/Subject";
 
 async function main() {
   try {
@@ -16,7 +18,7 @@ async function main() {
       synchronize: true,
       dropSchema: true,
       logging: true,
-      entities: [User, Profile, City],
+      entities,
       migrations: ["src/migration/**/*.ts"],
       subscribers: ["src/subscriber/**/*.ts"],
       cli: {
@@ -35,10 +37,11 @@ async function main() {
     {name: 'Москва'},
     {name: 'Химки'}
   ]
-  const cititesQuery = await cityRepo.save(cities);
+  await cityRepo.save(cities);
 
-  console.log(cititesQuery);
-  
+  const subjectRepo = getRepository(Subject);
+  const subjects = [{ name: "Русский язык" }, { name: "История" }, {name: "Биология"}, {name: "Химия"}];
+  await subjectRepo.save(subjects);
 
   const userRepository = getRepository(User);
   const user = new User();
@@ -61,7 +64,15 @@ async function main() {
       },
       user: {
         id: 1
+      },
+      subjects: [
+      {
+        id: 1
+      },
+      {
+        id: 2
       }
+      ]
     }
   );
 
@@ -73,7 +84,7 @@ async function main() {
     where: {
       id: 1
     },
-    relations: ["city", "user"]
+    relations: ["city", "user", "subjects", "places"]
   })
 
   console.log(queryProfile)
