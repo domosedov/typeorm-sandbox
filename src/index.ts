@@ -59,6 +59,12 @@ async function main() {
   const profile = profileRepo.create(
     {
       firstName: "Alex",
+      middleName: "igor",
+      lastName: "grigor",
+      education: "asd",
+      birthYear: 1992,
+      careerStartYear: 2001,
+      hourlyRate: 500,
       city: {
         id: 2
       },
@@ -84,7 +90,7 @@ async function main() {
     where: {
       id: 1
     },
-    relations: ["city", "user", "subjects", "places"]
+    // relations: ["city", "user", "subjects", "places"]
   })
 
   console.log(queryProfile)

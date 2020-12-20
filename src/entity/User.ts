@@ -44,6 +44,11 @@ export class User {
   })
   isBanned: boolean;
 
+  @Column({
+    default: "f"
+  })
+  isConfirmed: boolean;
+
   @CreateDateColumn()
   registeredAt: Date;  
 }

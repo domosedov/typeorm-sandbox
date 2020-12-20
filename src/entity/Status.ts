@@ -5,10 +5,9 @@ import {
   OneToMany,
 } from "typeorm";
 import { Profile } from "./Profile";
-import { Vacancy } from "./Vacancy";
 
 @Entity()
-export class Metro {
+export class Status {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,9 +16,6 @@ export class Metro {
   })
   name: string;
 
-  @OneToMany(() => Profile, (profile) => profile.metro)
+  @OneToMany(() => Profile, (profile) => profile.status)
   profile: Profile;
-
-  @OneToMany(() => Vacancy, (vacancy) => vacancy.metro)
-  vacancy: Vacancy;
 }

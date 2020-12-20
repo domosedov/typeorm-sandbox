@@ -2,7 +2,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
+  OneToMany,
 } from "typeorm";
+import { Vacancy } from "./Vacancy";
 
 @Entity()
 export class Place {
@@ -13,4 +15,7 @@ export class Place {
     unique: true,
   })
   name: string;
+
+  @OneToMany(() => Vacancy, (vacancy) => vacancy.place)
+  vacancy: Vacancy;
 }

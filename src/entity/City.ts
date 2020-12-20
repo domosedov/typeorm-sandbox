@@ -5,6 +5,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { Profile } from "./Profile";
+import { Vacancy } from "./Vacancy";
 
 @Entity()
 export class City {
@@ -18,4 +19,7 @@ export class City {
 
   @OneToMany(() => Profile, (profile) => profile.city)
   profile: Profile;
+
+  @OneToMany(() => Vacancy, (vacancy) => vacancy.city)
+  vacancy: Vacancy;
 }
